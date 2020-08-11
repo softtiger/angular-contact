@@ -14,6 +14,7 @@ import { TagNewComponent } from './tag-new/tag-new.component';
 import { TagEditComponent } from './tag-edit/tag-edit.component';
 import { ContactAboutComponent } from './contact-about/contact-about.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AppRoutingModule } from './app-routing.module';
     TagListComponent,
     TagNewComponent,
     TagEditComponent,
-    ContactAboutComponent
+    ContactAboutComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
