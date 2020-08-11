@@ -13,6 +13,7 @@ import { TagListComponent } from './tag-list/tag-list.component';
 import { TagNewComponent } from './tag-new/tag-new.component';
 import { TagEditComponent } from './tag-edit/tag-edit.component';
 import { ContactAboutComponent } from './contact-about/contact-about.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ContactAboutComponent } from './contact-about/contact-about.component';
     ContactAboutComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
