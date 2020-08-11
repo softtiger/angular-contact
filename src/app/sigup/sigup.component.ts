@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient}  from '@angular/common/http';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-sigup',
@@ -8,9 +9,10 @@ import { HttpClient}  from '@angular/common/http';
 })
 export class SigupComponent implements OnInit {
 
+  email_err_msg:string
   signupForm:{email:string,password:string} = { email:'',password:''}
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private route:Router) { }
 
   ngOnInit(): void {
   }
@@ -18,7 +20,14 @@ export class SigupComponent implements OnInit {
   sigup(){
      const formData = this.signupForm;
      console.log(formData)
-     this.http.post("http://localhost:3000/users",formData).toPromise().then(data => console.log(data));
+     //处理服务端的响应，成功则进入主页面；失败则提示
+     this.http.post("http://localhost:3000/users",formData).toPromise().then( ()=>{
+                  this.email_err_msg = "";
+                   this.route.navigate(['/'])
+            }
+
+           )
+            .catch(err => {if (err.status==409) this.email_err_msg ="邮箱已注册"});
   }
 
 }
