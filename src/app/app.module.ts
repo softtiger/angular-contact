@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule}  from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 
+
+import  { GlobalInterceptor }  from './global.interceptor';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -17,6 +19,7 @@ import { TagEditComponent } from './tag-edit/tag-edit.component';
 import { ContactAboutComponent } from './contact-about/contact-about.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LayoutComponent } from './layout/layout.component';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +43,11 @@ import { LayoutComponent } from './layout/layout.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass:GlobalInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
