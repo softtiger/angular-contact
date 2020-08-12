@@ -8,7 +8,7 @@ export class AuthGuard implements CanActivate {
   constructor(private route:Router) { }
   
   canActivate(){
-    const token = window.localStorage.getItem("token")
+    const token = window.sessionStorage.getItem("token")
     if (!token){
        this.route.navigate(["/sigin"]);
        return false;

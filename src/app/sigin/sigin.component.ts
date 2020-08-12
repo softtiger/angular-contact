@@ -8,6 +8,7 @@ import { HttpClient} from '@angular/common/http';
   styleUrls: ['./sigin.component.css']
 })
 export class SiginComponent implements OnInit {
+  err_msg:String
   //这里必须先初始化，如果是个空对象，会报错
   loginform:{
      email:String
@@ -24,11 +25,15 @@ export class SiginComponent implements OnInit {
     const formData = this.loginform;
     this.http.post("http://localhost:3000/session",formData).toPromise()
         .then((data:any) =>{ 
-                        window.localStorage.setItem("token",data.token)
+                        window.sessionStorage.setItem("token",data.token)
+                        window.sessionStorage.setItem("user_info",JSON.stringify(data.user))
+                        this.err_msg =""
                         this.router.navigate(['/'])
                       }
               )
-        .catch((err) => console.log(err))
+        .catch((err) => { if (err.status==401 || err.status==422)
+            this.err_msg ="邮箱或密码不正确"
+        })
   }
   ngOnInit(): void {
   }
