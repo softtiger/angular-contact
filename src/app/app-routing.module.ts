@@ -48,7 +48,7 @@ const routes: Routes = [
         component:ContactNewComponent
       },
       {
-        path:'edit',        //注意访问时，用  contact/edit
+        path:'edit/:id',        //注意访问时，用  contact/edit
         component:ContactEditComponent
       }
   ]
