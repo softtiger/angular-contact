@@ -1,6 +1,7 @@
 import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule,Routes} from '@angular/router';
+import  { AuthGuard }  from './auth.guard';
 import { LayoutComponent } from './layout/layout.component';
 import { SiginComponent } from './sigin/sigin.component';
 import { SigupComponent }  from './sigup/sigup.component';
@@ -24,16 +25,19 @@ const routes: Routes = [
 },
 {
   path: 'layout',
-  component:LayoutComponent
+  component:LayoutComponent,
+ // canActivate: [AuthGuard]
 },
 {
   path:'',
   redirectTo:'/contact',
+ // canActivate: [AuthGuard],
   pathMatch:'full'
 },
 {
   path: 'contact',
   component: LayoutComponent,
+  canActivate: [AuthGuard],
   children:[
       {
         path: '',
@@ -52,6 +56,7 @@ const routes: Routes = [
 {
   path: 'tags',
   component: LayoutComponent,
+ // canActivate: [AuthGuard],
   children:[
       {
         path: '',
@@ -70,6 +75,7 @@ const routes: Routes = [
 {
   path: 'about',
   component: LayoutComponent,
+ // canActivate: [AuthGuard],
   children:[
       {
         path: '',
@@ -85,6 +91,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes)
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[AuthGuard]
 })
 export class AppRoutingModule { }

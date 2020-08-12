@@ -21,8 +21,9 @@ export class SigupComponent implements OnInit {
      const formData = this.signupForm;
      console.log(formData)
      //处理服务端的响应，成功则进入主页面；失败则提示
-     this.http.post("http://localhost:3000/users",formData).toPromise().then( ()=>{
+     this.http.post("http://localhost:3000/users",formData).toPromise().then( (data:any)=>{
                   this.email_err_msg = "";
+                  window.localStorage.setItem("token",data.token)
                    this.route.navigate(['/'])
             }
 
